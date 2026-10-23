@@ -8,7 +8,7 @@ A convention that's only written down gets broken; a PHPStan rule enforces it in
 
 ## What it does
 
-`/new-phpstan-rule <what the rule should report>`:
+`/ianf-new-phpstan-rule <what the rule should report>`:
 
 1. Settles a package name with you. It's permanent once on Packagist.
 2. Probes PHPStan's actual behaviour before encoding any assumption about it.
@@ -34,15 +34,15 @@ Each package is created in `~/projects/phpstan-rules/<name>/` as an independent 
 2. Link the skill into Claude Code:
 
    ```sh
-   ln -s ~/projects/claude/new-phpstan-rule/skills/new-phpstan-rule ~/.claude/skills/new-phpstan-rule
+   ln -s ~/projects/claude/new-phpstan-rule/skills/ianf-new-phpstan-rule ~/.claude/skills/ianf-new-phpstan-rule
    ```
 
 3. To publish, set up [repo-tools](https://github.com/ianflanagan1/repo-tools#setup) by following its README: `github` and `packagist` on your PATH, the GitHub token and the Packagist tokens.
 4. Optionally allow the scripts in `~/.claude/settings.json`:
 
    ```json
-   "Bash(~/.claude/skills/new-phpstan-rule/scripts/scaffold.sh *)",
-   "Bash(~/.claude/skills/new-phpstan-rule/scripts/check.sh *)"
+   "Bash(~/.claude/skills/ianf-new-phpstan-rule/scripts/scaffold.sh *)",
+   "Bash(~/.claude/skills/ianf-new-phpstan-rule/scripts/check.sh *)"
    ```
 
 To change the vendor, namespace or author, edit the variables at the top of `scripts/scaffold.sh` and the author in `template/composer.json` and `template/LICENSE`.

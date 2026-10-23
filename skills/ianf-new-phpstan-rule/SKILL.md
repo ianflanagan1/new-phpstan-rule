@@ -1,5 +1,5 @@
 ---
-name: new-phpstan-rule
+name: ianf-new-phpstan-rule
 description: Create a new custom PHPStan rule as its own Composer package (ianflanagan1/phpstan-<name>), test-first, and optionally publish it to GitHub and Packagist. Use when the user wants a PHPStan rule that enforces a convention, especially one to reuse across projects.
 argument-hint: <what the rule should report>
 allowed-tools: Bash(command -v github packagist), Bash(github publish:*), Bash(packagist publish:*)
