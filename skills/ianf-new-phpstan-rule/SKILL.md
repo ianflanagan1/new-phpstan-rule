@@ -50,7 +50,7 @@ Write `src/<Pascal>Rule.php` as `final readonly class <Pascal>Rule implements Ru
 
 ## 7. Commit and tag
 
-In the package directory: `git add -A`, commit as `Add <Pascal>Rule` with a short body saying what it reports, and tag `v0.1.0`.
+In the package directory: `git add --all`, commit as `Add <Pascal>Rule` with a short body saying what it reports, and tag `v0.1.0`.
 
 ## 8. Publish
 

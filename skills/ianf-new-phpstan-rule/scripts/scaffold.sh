@@ -15,7 +15,7 @@
 # script stops if the directory exists or the package name is taken on Packagist.
 # Composer runs in the composer Docker image, so Docker must be running.
 
-set -euo pipefail
+set -o errexit -o nounset -o pipefail
 
 VENDOR=ianflanagan1
 NAMESPACE_ROOT='IanFlanagan\PhpstanRules'
@@ -39,7 +39,7 @@ pascal=$(perl -pe 's/(?:^|-)(.)/\U$1/g' <<<"$name")
 namespace="$NAMESPACE_ROOT\\$pascal"
 
 [ ! -e "$dir" ] || die "$dir already exists"
-if curl -fsS -o /dev/null "https://packagist.org/packages/$package.json" 2>/dev/null; then
+if curl --fail --silent --show-error --output /dev/null "https://packagist.org/packages/$package.json" 2>/dev/null; then
     die "$package is already on Packagist"
 fi
 docker info >/dev/null 2>&1 || die "Docker isn't running"
@@ -66,11 +66,11 @@ NAME=$name PASCAL=$pascal PACKAGE=$package NAMESPACE=$namespace DESCRIPTION=$des
         s/__YEAR__/$ENV{YEAR}/g;
     ' {} +
 
-git init -q -b main
+git init --quiet --initial-branch main
 
-docker run --rm -u "$(id -u):$(id -g)" -e COMPOSER_HOME=/tmp/composer \
-    -e GIT_CONFIG_COUNT=1 -e GIT_CONFIG_KEY_0=safe.directory -e GIT_CONFIG_VALUE_0=/app \
-    -v "$dir":/app -w /app composer:latest \
+docker run --rm --user "$(id -u):$(id -g)" --env COMPOSER_HOME=/tmp/composer \
+    --env GIT_CONFIG_COUNT=1 --env GIT_CONFIG_KEY_0=safe.directory --env GIT_CONFIG_VALUE_0=/app \
+    --volume "$dir":/app --workdir /app composer:latest \
     composer update --no-interaction --no-progress \
     || die "composer failed; Docker must be able to mount $dir (Docker Desktop shares /Users by default)"
 
