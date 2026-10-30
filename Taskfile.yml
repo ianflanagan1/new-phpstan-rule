@@ -1,0 +1,7 @@
+version: '3'
+
+tasks:
+  lint:
+    desc: ShellCheck the skill's scripts
+    cmds:
+      - shellcheck skills/*/scripts/*.sh

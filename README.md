@@ -59,7 +59,7 @@ Template dotfiles are stored as `_gitignore`, `_gitattributes` and `_github/`, s
 ## Development
 
 ```sh
-devbox run lint   # shellcheck
+devbox run -- task lint   # shellcheck
 ```
 
 ## License
